@@ -6,4 +6,6 @@
     )
 )
 
-(print (factorial 5))
+(print "Ingrese un numero: ")
+(setq numero (read))
+(print (factorial numero))
