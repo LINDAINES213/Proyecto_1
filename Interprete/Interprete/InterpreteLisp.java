@@ -58,7 +58,7 @@ public class InterpreteLisp {
             return caracteres;
         }
         else if(!codigo.contains(")")){
-            caracteres.push("Error! Se ha olvidado colocar parentésis al código");
+            caracteres.push("Error! Se ha olvidado colocar parentï¿½sis al cï¿½digo");
             return caracteres;
         }
         

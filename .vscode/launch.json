@@ -9,6 +9,13 @@
             "name": "Launch Proyecto01Main",
             "request": "launch",
             "mainClass": "Interprete.Proyecto01Main",
+            "projectName": "Proyecto_1"
+        },
+        {
+            "type": "java",
+            "name": "Launch Proyecto01Main",
+            "request": "launch",
+            "mainClass": "Interprete.Proyecto01Main",
             "projectName": "Proyecto1AED_6536b87d"
         },
         {
