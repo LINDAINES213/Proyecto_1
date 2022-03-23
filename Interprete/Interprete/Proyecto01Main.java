@@ -45,11 +45,11 @@ public class Proyecto01Main {
         
         while (salir != true) {
         	String codigo = "";
-            System.out.print("Lisp > ");
+            System.out.print("Lisp UVG> ");
             do {
                 codigo = scan.nextLine();
             } while (codigo.length() <= 0);
-            Interprete.separarCaracteres(codigo);
+            System.out.println(Interprete.interpretarCodigo(codigo));
             
             
         }

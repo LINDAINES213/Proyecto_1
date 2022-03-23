@@ -19,17 +19,17 @@ public class StackArrayList<T> implements IStack<T> {
 	
 	@Override
 	public void push(T value) {		
-		lista.add(0, value);
+		lista.add(value);
 	}
 
 	@Override
 	public T pull() {
-		return lista.remove(0);
+		return lista.remove(count() - 1);
 	}
 
 	@Override
 	public T peek() {
-		return lista.get(0);
+		return lista.get(lista.size() - 1);
 	}
 
 	@Override
