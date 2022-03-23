@@ -41,4 +41,9 @@ public class StackArrayList<T> implements IStack<T> {
 	public boolean isEmpty() {		
 		return lista.isEmpty();
 	}
+
+    @Override
+    public T get(int a) {
+        return lista.get(a);
+    }
 }

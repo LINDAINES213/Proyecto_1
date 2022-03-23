@@ -14,4 +14,7 @@ public interface IStack<T> {
 	int count();
 	
 	boolean isEmpty();
+
+    T get(int a);
+
 }

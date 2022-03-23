@@ -16,6 +16,7 @@ public class Proyecto01Main {
         int opcion = 0;
         String codigo = "";
         boolean salir = false;
+        InterpreteLisp Interprete = new InterpreteLisp();
 
         System.out.println("Interprete Lisp");
         System.out.println("Bienvenido al interprete Lisp, este es un lenguaje basado en el uso de operaciones Postfix con el objetivo de trabajar en listas.\n");
@@ -26,6 +27,7 @@ public class Proyecto01Main {
             do {
                 codigo = scan.next();
             } while (codigo.length() <= 0);
+            Interprete.separarCaracteres(codigo);
         }
     }
 }
