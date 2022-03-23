@@ -21,19 +21,25 @@ public class InterpreteLisp {
     public StackArrayList<String> separarCaracteres(String codigo) {
         StackArrayList<String> caracteres = new StackArrayList<String>();
 
-        if ((!codigo.contains("(")) || (!codigo.contains(")"))) {
-            String c = codigo.replace("(", "").replace(")", "");
-            for (int i = 0; i < c.split(" ").length; i++) {
-            caracteres.push(c.split(" ")[i]);
-            }
+        if (!codigo.contains("(")) {
+            
+        	caracteres.push("Error! Se ha olvidado colocar parentesis al codigo.");
             return caracteres;
         }
-        else {
-            System.out.println("Error! Se ha olvidado colocar parentesis al codigo.");
+        else if(!codigo.contains(")")){
+            caracteres.push("Error! Se ha olvidado colocar parentésis al código");
+            return caracteres;
         }
+        
+        String c = codigo.replace("(", "").replace(")", "");
+        for (int i = 0; i < c.split(" ").length; i++) {
+        caracteres.push(c.split(" ")[i]);
+        }
+        
         for (int i = 0; i < caracteres.count(); i++) {
-            System.out.println(caracteres.get(i));
+        	System.out.println(caracteres.get(i));
         }
+
 
         return caracteres;
     }
