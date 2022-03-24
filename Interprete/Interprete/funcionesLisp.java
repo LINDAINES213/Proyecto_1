@@ -9,11 +9,10 @@ public class funcionesLisp {
 		String tempKey = "";
 		HashMap<String, String> hmap = new HashMap<String, String>();
 		
-		//iterating over the stack
+
 		for(int a = 0; a < pila.count(); a++) {
-			tempKey = pila.get(a); //looking for variables
-			
-			if(hmap.containsKey(tempKey)) {//if found variable
+			tempKey = pila.get(a); 
+			if(hmap.containsKey(tempKey)) {
 				nuevosValores.push(hmap.get(tempKey));
 			}else {
 				nuevosValores.push(tempKey);
@@ -29,6 +28,15 @@ public class funcionesLisp {
 			hmap.put(variable, valor);
 		}else {
 			hmap.put(variable, valor);
+		}
+	}
+	
+	public boolean buscarLlaves(String key) {
+		HashMap<String, String> hmap = new HashMap<String, String>();
+		if(hmap.containsKey(key)){
+			return true;
+		}else {
+			return false;
 		}
 	}
 }

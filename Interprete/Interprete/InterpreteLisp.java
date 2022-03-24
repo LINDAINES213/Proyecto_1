@@ -30,7 +30,7 @@ public class InterpreteLisp {
         
         stack = separarCaracteres(codigo);
         
-        if(r && conditional){ //if is recursive and conditional
+        if(r && conditional){ 
 			stack = codigoRecursivo; 
 		}
 		
@@ -74,7 +74,7 @@ public class InterpreteLisp {
         	 return "Se ha creado exitosamente la función de nombre: "+ stackFunciones.peek().nombreFuncion + "\nDigite 'functions' si desea programar su función ";
          
          }else if(p.equals("setq")){
-        	 if(stack.count()>3) {
+        	 if(stack.count()>5) {
         		 System.out.println("¡SetQ solo acepta una variable y un valor!");
         	 }else {
         		 functions.añadirHashmap(stack.get(1),stack.get(2));
@@ -82,6 +82,14 @@ public class InterpreteLisp {
         	 
         	 return "Se ha asignado el valor "+ stack.get(2) + " para la variable: "+stack.get(1);
         	 
+         }else if (functions.buscarLlaves(p)) {
+				//StackVector<String> x = setq.changeVariablesFound(mainCode);
+        	 String cadena = "";
+             for(int i = 0; i < stack.count(); i++){
+                 cadena += stack.get(i);
+                 cadena += " ";   
+             }
+				return cadena;
          }else if(p.equals("atom")) {
         	 String bool = "";
         	 for(int i=0;i<stack.count();i++) {
@@ -90,10 +98,57 @@ public class InterpreteLisp {
         	 }
         	 
         	 return predicado.evaluarPredicado(bool);
-         }
-        
+         }else if(p.equals("list")) {
+        	 String bool = "";
+        	 for(int i=0;i<stack.count();i++) {
+        		 bool += stack.get(i);
+        		 bool += " ";
+        	 }
+        	 
+        	 return predicado.evaluarPredicado(bool);
+         }else if(p.equals("equal")) {
+        	 String expresion = "";
+        	 if(stack.count() > 3) {
+					return "¡Error! El metodo Equal solo toma dos argumentos";
+				}else if(stack.count() < 3 ) {
+					return "¡Error! El metodo Equal solo toma dos argumentos";
+				}else {
+					stack = functions.cambioVariable(stack);
+					for(int i = 0; i<stack.count(); i++) {
+						expresion += stack.get(i) + " ";
+					}
+					return predicado.evaluarPredicado(expresion);
+				}
+         }else if(p.equals("<")) {
+        	 String expresion = "";
+        	 if(stack.count() > 3) {
+					return "¡Error! El metodo < solo toma dos argumentos";
+				}else if(stack.count() < 3 ) {
+					return "¡Error! El metodo > solo toma dos argumentos";
+				}else {
+					stack = functions.cambioVariable(stack);
+					
+					for(int i = 0; i<stack.count(); i++) {
+						expresion += stack.get(i) + " ";
+					}
+					return predicado.evaluarPredicado(expresion);
+				}
+         }else if(p.equals(">")) {
+        	 String expression = "";
+        	 if(stack.count() > 3) {
+					return "¡Error! El metodo > solo toma dos argumentos";
+				}else if(stack.count() < 3 ) {
+					return "¡Error! El metodo > solo toma dos argumentos";
+				}else {
+					stack = functions.cambioVariable(stack);
+					for(int i = 0; i<stack.count(); i++) {
+						expression += stack.get(i) + " ";
+					}
+					return predicado.evaluarPredicado(expression);
+				}
+			}	
         return "";
-        }
+	}    
 
     public StackArrayList<String> separarCaracteres(String codigo) {
         StackArrayList<String> caracteres = new StackArrayList<String>();
