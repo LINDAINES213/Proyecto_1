@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Proyecto01Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         Scanner scan = new Scanner(System.in);
         boolean salir = false;
@@ -45,11 +45,18 @@ public class Proyecto01Main {
         
         while (salir != true) {
         	String codigo = "";
-            System.out.print("Lisp UVG> ");
+            System.out.print("\nLisp UVG> ");
             do {
                 codigo = scan.nextLine();
             } while (codigo.length() <= 0);
-            System.out.println(Interprete.interpretarCodigo(codigo));
+			try {
+
+				System.out.println(Interprete.interpretarCodigo(codigo));
+				
+			} catch (IndexOutOfBoundsException e) {
+				//TODO: handle exception
+			}
+            
             
             
         }

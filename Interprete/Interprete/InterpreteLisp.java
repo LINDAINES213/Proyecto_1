@@ -33,32 +33,26 @@ public class InterpreteLisp {
 		}
 		
         p = stack.get(0);
-        
-        if(p.equals("+") || p.equals("-") || p.equals("*")||p.equals("/")) {
-        	stack = functions.cambioVariable(stack);
-        	for(int i = 0; i < stack.count(); i++){
-				operacion += stack.get(i);
-				operacion += " ";
-			}
-        }
+
+            if(p.equals("+") || p.equals("-") || p.equals("*")||p.equals("/")) {
+                stack = functions.cambioVariable(stack);
+                for(int i = 0; i < stack.count(); i++){
+                    operacion += stack.get(i);
+                    operacion += " ";
+                }
+            } 
         
         String resultado = calculadoraLisp.calcularOperacion(operacion);
         //System.out.println(calculadoraLisp.calcularOperacion(operacion));
         return resultado;
     }
-
-	
 	
     public StackArrayList<String> separarCaracteres(String codigo) {
         StackArrayList<String> caracteres = new StackArrayList<String>();
 
-        if (!codigo.contains("(")) {
+        if (!codigo.contains("(") || !codigo.contains(")")) {
             
-        	caracteres.push("Error! Se ha olvidado colocar parentesis al codigo.");
-            return caracteres;
-        }
-        else if(!codigo.contains(")")){
-            caracteres.push("Error! Se ha olvidado colocar parent�sis al c�digo");
+        	System.out.println("\nERROR! SE HA OLVIDADO DE COLOCAR PARENTESIS AL CODIGO!");
             return caracteres;
         }
         
@@ -67,8 +61,6 @@ public class InterpreteLisp {
         caracteres.push(c.split(" ")[i]);
         }
         
-
-
         return caracteres;
     }
 }
