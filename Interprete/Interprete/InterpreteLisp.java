@@ -23,6 +23,7 @@ public class InterpreteLisp {
     	String nombreFuncion = "";
     	Calculator calculadoraLisp = new Calculator();
     	funcionesLisp functions = new funcionesLisp();
+    	Predicados predicado = new Predicados();
         StackArrayList<String> stack = new StackArrayList<String>();
         StackArrayList<String> codigoRecursivo = new StackArrayList<String>();
         StackArrayList<Defun> stackFunciones = new StackArrayList<Defun>();
@@ -87,6 +88,8 @@ public class InterpreteLisp {
         		 bool += stack.get(i);
         		 bool += " ";
         	 }
+        	 
+        	 return predicado.evaluarPredicado(bool);
          }
         
         return "";
