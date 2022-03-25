@@ -17,23 +17,29 @@ public class InterpreteLisp {
 
 	public String interpretarCodigo(String codigo) { //M茅todo para interpretar c贸digo.
     	String p;
-		boolean r = false;
-		boolean c = true;
+		boolean r = false; //Variable de recursividad
+		boolean c = true;  //Variable de condicionales
     	String operacion = "";
     	String nombreFuncion = "";
     	Calculator calculadoraLisp = new Calculator();
     	funcionesLisp functions = new funcionesLisp();
     	Predicados predicado = new Predicados();
+    	Cond cond = new Cond();
         StackArrayList<String> stack = new StackArrayList<String>();
         StackArrayList<String> codigoRecursivo = new StackArrayList<String>();
         StackArrayList<String> recursivoR = new StackArrayList<String>();
         StackArrayList<Defun> stackFunciones = new StackArrayList<Defun>();
         String parametro;
         String val;
-        String funcionVal;
+        String funcionVal = "";
         String funcionNombre = "";
+        String param = "";
+        String expresion = "";
+        String resultado = "";
+        String[] T = new String[5];
         //int c = -2;
-		int contador = -1;
+		int contador = 0;
+		int contadorR = -1;
         
         stack = separarCaracteres(codigo);
         
@@ -41,7 +47,7 @@ public class InterpreteLisp {
 			stack = codigoRecursivo; 
 		}
         
-        if(r && !c) { 
+        if(r && !c) {  
         	int vbls = 0;
 			int aux = 0; 
 			parametro = getParametro(funcionNombre); 
@@ -70,7 +76,7 @@ public class InterpreteLisp {
                     operacion += stack.get(i);
                     operacion += " ";
                 }  
-                String resultado = calculadoraLisp.calcularOperacion(operacion);
+                resultado = calculadoraLisp.calcularOperacion(operacion);
                 return resultado;
          }else if(p.equals("quote")) { //Opci贸n para el quote en Lisp.
         	 String cadena = "";
@@ -87,7 +93,7 @@ public class InterpreteLisp {
         	 String nuevoCodigo = codigo;
         	 
         	 String funcion = "";
-        	 if((stack.count() >=4)) {
+        	 if((stack.count() >=800)) {
         		 System.out.println("rror!, ha ingresado valores de mas, recuerde que una funci髇 lleva (DEFUN + Nombre de la funci髇 + (Parametros))");
 
         	 }else {
@@ -136,7 +142,6 @@ public class InterpreteLisp {
         	 
         	 return predicado.evaluarPredicado(bool); //Retorna el predicado.
          }else if(p.equals("equal")) { //Opci贸n para utilizar el predicado Equal.
-        	 String expresion = "";
         	 if(stack.count() > 3) {
 					return "锟紼rror! El metodo Equal solo toma dos argumentos";
 				}else if(stack.count() < 3 ) {
@@ -149,7 +154,6 @@ public class InterpreteLisp {
 					return predicado.evaluarPredicado(expresion); //Retorna el predicado.
 				}
          }else if(p.equals("<")) { //Opci贸n para utilizar el predicado menor que.
-        	 String expresion = "";
         	 if(stack.count() > 3) {
 					return "锟紼rror! El metodo < solo toma dos argumentos";
 				}else if(stack.count() < 3 ) {
@@ -163,7 +167,6 @@ public class InterpreteLisp {
 					return predicado.evaluarPredicado(expresion); //Retorna el predicado.
 				}
          }else if(p.equals(">")) {
-        	 String expresion = "";
         	 if(stack.count() > 3) {
 					return "锟紼rror! El metodo > solo toma dos argumentos";
 				}else if(stack.count() < 3 ) {
@@ -175,9 +178,57 @@ public class InterpreteLisp {
 					}
 					return predicado.evaluarPredicado(expresion);
 				}
+		}else if(p.equals("cond")) {
+			
+			if(r) {
+				param = getParametro(funcionNombre);
+				stack = pushParametro(stack, param, String.valueOf(contador));
 			}
+			stack = functions.cambioVariable(stack);
+			for(int i=1;i<=3;i++) {
+			String resultadoCount = stack.get(0);
+				try {
+					expresion += stack.get(i);
+				}catch(Exception e) {
+					System.out.println("rror! el m閠odo Cond toma dos valores");
+				}
+			}
+			resultado = predicado.evaluarPredicado(expresion);
+			if(stack.count() == 3) {
+				return resultado;
+			}else {
+				if(resultado.equals("T")) {
+					cond.obtenerDefinicionCodigo(stackFunciones, funcionNombre);
+					if(stack.count()==1) {
+						String resultadoCount = stack.get(0);
+						if(esNumero(resultadoCount)) {
+							if(r) {
+								if(contadorR == contador) {
+									return resultadoCount;
+								}
+								recursivoR.push(resultadoCount);
+							}
+						}else {
+							if(resultadoCount.equals(getParametro(funcionNombre))) {
+								if(r) {
+									if(contadorR == contador) {
+										return String.valueOf(contador);
+										}
+									recursivoR.push(String.valueOf(contador));
+									}else {
+										return funcionVal;
+								}
+							}
+						}
+					}else if(resultado.equals("NIL")) {
+						cond.CondFalso(cond.obtenerDefinicionCodigo(stackFunciones, funcionNombre));
+					}
+				}
+			}
+		}
 				
-        return "";
+        String o = recursivoR.peek();
+        return resultado;
 	}    
 
     public StackArrayList<String> separarCaracteres(String codigo) { //M茅todo para separar caracteres de la expresi贸n en la calculadora.
@@ -213,6 +264,8 @@ public class InterpreteLisp {
     	return "null";
     }
     
+ 
+    
     public StackArrayList<String> pushParametro(StackArrayList<String> codigo, String parametro, String val) {
     	StackArrayList<String> p = new StackArrayList<String>();
     	for(int a = 0; a < codigo.count(); a++) {
@@ -224,5 +277,14 @@ public class InterpreteLisp {
     		}
     	}
     	return p;
+    }
+    
+    public boolean esNumero(String c) {
+    	try {
+    		Integer.parseInt(c);
+    		return true;
+    	}catch(NumberFormatException e) {
+    		return true;
+    	}
     }
 }

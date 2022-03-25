@@ -18,7 +18,7 @@ public class Predicados {
         }else if(codigo.contains(">")){ //Si contiene > lo que escriba el usuario, el predicado es mayor que.
         	predicado = "mayorQue";
         }else {
-        	return "NIL"; //No hay predicado si no se escribió alguno de los anteriores predicados.
+        	return "T"; //No hay predicado si no se escribió alguno de los anteriores predicados.
         }
 		
 		if(predicado.equals("atom")) { //Devuelve T si hay predicado y devuelve NIL si no lo hay de acuerdo a la correcta utilización del predicado
