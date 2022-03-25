@@ -15,7 +15,7 @@ public class InterpreteLisp {
     
    
 
-	public String interpretarCodigo(String codigo) {
+	public String interpretarCodigo(String codigo) { //M茅todo para interpretar c贸digo.
     	String p;
 		boolean r = false;
 		boolean c = true;
@@ -64,7 +64,7 @@ public class InterpreteLisp {
 		}
         p = stack.get(0);
 
-        if(p.equals("+") || p.equals("-") || p.equals("*")||p.equals("/")) {
+        if(p.equals("+") || p.equals("-") || p.equals("*")||p.equals("/")) { //Condicional if para las direentes operaciones aritm茅ticas.
                 stack = functions.cambioVariable(stack);
                 for(int i = 0; i < stack.count(); i++){
                     operacion += stack.get(i);
@@ -72,7 +72,7 @@ public class InterpreteLisp {
                 }  
                 String resultado = calculadoraLisp.calcularOperacion(operacion);
                 return resultado;
-         }else if(p.equals("quote")) {
+         }else if(p.equals("quote")) { //Opci贸n para el quote en Lisp.
         	 String cadena = "";
         	 String[] resultadoRp = codigo.replace("(","").replace(")","").split(" ");
         	 for(int i=0; i<resultadoRp.length;i++) {
@@ -83,12 +83,17 @@ public class InterpreteLisp {
         	 }
         	 nombreFuncion = cadena;
         	 return ("("+cadena+")");
-         }else if(p.equals("defun")) {
+         }else if(p.equals("defun")) { //Opci贸n para la utilizaci贸n de funciones en Lisp.
         	 String nuevoCodigo = codigo;
         	 
         	 String funcion = "";
+<<<<<<< HEAD
         	 if((stack.count() >=4)) {
         		 System.out.println("rror!, ha ingresado valores de mas, recuerde que una funci髇 lleva (DEFUN + Nombre de la funci髇 + (Parametros))");
+=======
+        	 if((stack.count() >=5)) {
+        		 System.out.println("锟紼rror!, ha ingresado valores de mas, recuerde que una funci锟絥 lleva (DEFUN + Nombre de la funci锟絥 + (Parametros))");
+>>>>>>> d95513613f504d1f718d2a6948f761ce6587be66
         	 }else {
         		 for(int i = 3; i<stack.count();i++) {
         			 funcion += stack.get(i);
@@ -99,16 +104,21 @@ public class InterpreteLisp {
         	 }
         	 
         	 //return stackFunciones.peek().nombreFuncion;
+<<<<<<< HEAD
         	 return "Se ha creado exitosamente la funci髇 de nombre: "+ stackFunciones.peek().nombreFuncion;
+=======
+        	 return "Se ha creado exitosamente la funci锟絥 de nombre: "+ stackFunciones.peek().nombreFuncion + "\nDigite 'functions' si desea programar su funci锟絥 ";
+>>>>>>> d95513613f504d1f718d2a6948f761ce6587be66
          
-         }else if(p.equals("setq")){
+         }else if(p.equals("setq")){ //Opci贸n para utilizar el setq.
         	 if(stack.count()>5) {
-        		 System.out.println("etQ solo acepta una variable y un valor!");
+        		 System.out.println("锟絊etQ solo acepta una variable y un valor!");
         	 }else {
-        		 functions.a馻dirHashmap(stack.get(1),stack.get(2));
+        		 functions.anadirHashmap(stack.get(1),stack.get(2));
         	 }
         	 
-        	 return "Se ha asignado el valor "+ stack.get(2) + " para la variable: "+stack.get(1);
+        	 return "\nSe ha asignado el valor "+ stack.get(2) + " para la variable: "+stack.get(1);
+			 
         	 
          }else if (functions.buscarLlaves(p)) {
         	 String cadena = "";
@@ -117,68 +127,77 @@ public class InterpreteLisp {
                  cadena += " ";   
              }
 				return cadena;
-         }else if(p.equals("atom")) {
+         }else if(p.equals("atom")) {  //Opci贸n para utilizar el predicado Atom.
         	 String bool = "";
         	 for(int i=0;i<stack.count();i++) {
         		 bool += stack.get(i);
         		 bool += " ";
         	 }
         	 
-        	 return predicado.evaluarPredicado(bool);
-         }else if(p.equals("list")) {
+        	 return predicado.evaluarPredicado(bool); //Retorna el predicado.
+         }else if(p.equals("list")) { //Opci贸n para utilizar el predicado List.
         	 String bool = "";
         	 for(int i=0;i<stack.count();i++) {
         		 bool += stack.get(i);
         		 bool += " ";
         	 }
         	 
-        	 return predicado.evaluarPredicado(bool);
-         }else if(p.equals("equal")) {
+        	 return predicado.evaluarPredicado(bool); //Retorna el predicado.
+         }else if(p.equals("equal")) { //Opci贸n para utilizar el predicado Equal.
         	 String expresion = "";
         	 if(stack.count() > 3) {
-					return "rror! El metodo Equal solo toma dos argumentos";
+					return "锟紼rror! El metodo Equal solo toma dos argumentos";
 				}else if(stack.count() < 3 ) {
-					return "rror! El metodo Equal solo toma dos argumentos";
+					return "锟紼rror! El metodo Equal solo toma dos argumentos";
 				}else {
 					stack = functions.cambioVariable(stack);
 					for(int i = 0; i<stack.count(); i++) {
 						expresion += stack.get(i) + " ";
 					}
-					return predicado.evaluarPredicado(expresion);
+					return predicado.evaluarPredicado(expresion); //Retorna el predicado.
 				}
-         }else if(p.equals("<")) {
+         }else if(p.equals("<")) { //Opci贸n para utilizar el predicado menor que.
         	 String expresion = "";
         	 if(stack.count() > 3) {
-					return "rror! El metodo < solo toma dos argumentos";
+					return "锟紼rror! El metodo < solo toma dos argumentos";
 				}else if(stack.count() < 3 ) {
-					return "rror! El metodo > solo toma dos argumentos";
+					return "锟紼rror! El metodo > solo toma dos argumentos";
 				}else {
 					stack = functions.cambioVariable(stack);
 					
 					for(int i = 0; i<stack.count(); i++) {
 						expresion += stack.get(i) + " ";
 					}
-					return predicado.evaluarPredicado(expresion);
+					return predicado.evaluarPredicado(expresion); //Retorna el predicado.
 				}
+<<<<<<< HEAD
          }else if(p.equals(">")) {
         	 String expresion = "";
+=======
+         }else if(p.equals(">")) { //Opci贸n para utilizar el predicado mayor que.
+        	 String expression = "";
+>>>>>>> d95513613f504d1f718d2a6948f761ce6587be66
         	 if(stack.count() > 3) {
-					return "rror! El metodo > solo toma dos argumentos";
+					return "锟紼rror! El metodo > solo toma dos argumentos";
 				}else if(stack.count() < 3 ) {
-					return "rror! El metodo > solo toma dos argumentos";
+					return "锟紼rror! El metodo > solo toma dos argumentos";
 				}else {
 					stack = functions.cambioVariable(stack);
 					for(int i = 0; i<stack.count(); i++) {
 						expresion += stack.get(i) + " ";
 					}
+<<<<<<< HEAD
 					return predicado.evaluarPredicado(expresion);
+=======
+					return predicado.evaluarPredicado(expression); //Retorna el predicado.
+>>>>>>> d95513613f504d1f718d2a6948f761ce6587be66
 				}
 			}
 				
         return "";
 	}    
 
-    public StackArrayList<String> separarCaracteres(String codigo) {
+    public StackArrayList<String> separarCaracteres(String codigo) { //M茅todo para separar caracteres de la expresi贸n en la calculadora.
         StackArrayList<String> caracteres = new StackArrayList<String>();
 
         if (!codigo.contains("(") || !codigo.contains(")")) {
@@ -195,7 +214,7 @@ public class InterpreteLisp {
         return caracteres;
     }
     
-    public StackArrayList<String> defun(){
+    public StackArrayList<String> defun(){  //M茅todo para devolver la funci贸n defun al programa.
     	StackArrayList<String> function = new StackArrayList<String>();
     	
     	return function;
