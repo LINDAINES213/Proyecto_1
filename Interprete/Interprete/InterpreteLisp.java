@@ -87,13 +87,9 @@ public class InterpreteLisp {
         	 String nuevoCodigo = codigo;
         	 
         	 String funcion = "";
-<<<<<<< HEAD
         	 if((stack.count() >=4)) {
         		 System.out.println("¡Error!, ha ingresado valores de mas, recuerde que una función lleva (DEFUN + Nombre de la función + (Parametros))");
-=======
-        	 if((stack.count() >=5)) {
-        		 System.out.println("ï¿½Error!, ha ingresado valores de mas, recuerde que una funciï¿½n lleva (DEFUN + Nombre de la funciï¿½n + (Parametros))");
->>>>>>> d95513613f504d1f718d2a6948f761ce6587be66
+
         	 }else {
         		 for(int i = 3; i<stack.count();i++) {
         			 funcion += stack.get(i);
@@ -104,11 +100,7 @@ public class InterpreteLisp {
         	 }
         	 
         	 //return stackFunciones.peek().nombreFuncion;
-<<<<<<< HEAD
         	 return "Se ha creado exitosamente la función de nombre: "+ stackFunciones.peek().nombreFuncion;
-=======
-        	 return "Se ha creado exitosamente la funciï¿½n de nombre: "+ stackFunciones.peek().nombreFuncion + "\nDigite 'functions' si desea programar su funciï¿½n ";
->>>>>>> d95513613f504d1f718d2a6948f761ce6587be66
          
          }else if(p.equals("setq")){ //OpciÃ³n para utilizar el setq.
         	 if(stack.count()>5) {
@@ -170,13 +162,8 @@ public class InterpreteLisp {
 					}
 					return predicado.evaluarPredicado(expresion); //Retorna el predicado.
 				}
-<<<<<<< HEAD
          }else if(p.equals(">")) {
         	 String expresion = "";
-=======
-         }else if(p.equals(">")) { //OpciÃ³n para utilizar el predicado mayor que.
-        	 String expression = "";
->>>>>>> d95513613f504d1f718d2a6948f761ce6587be66
         	 if(stack.count() > 3) {
 					return "ï¿½Error! El metodo > solo toma dos argumentos";
 				}else if(stack.count() < 3 ) {
@@ -186,11 +173,7 @@ public class InterpreteLisp {
 					for(int i = 0; i<stack.count(); i++) {
 						expresion += stack.get(i) + " ";
 					}
-<<<<<<< HEAD
 					return predicado.evaluarPredicado(expresion);
-=======
-					return predicado.evaluarPredicado(expression); //Retorna el predicado.
->>>>>>> d95513613f504d1f718d2a6948f761ce6587be66
 				}
 			}
 				
