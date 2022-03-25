@@ -80,7 +80,8 @@ public class InterpreteLisp {
         		 functions.anadirHashmap(stack.get(1),stack.get(2));
         	 }
         	 
-        	 return "Se ha asignado el valor "+ stack.get(2) + " para la variable: "+stack.get(1);
+        	 return "\nSe ha asignado el valor "+ stack.get(2) + " para la variable: "+stack.get(1);
+			 
         	 
          }else if (functions.buscarLlaves(p)) {
 				//StackVector<String> x = setq.changeVariablesFound(mainCode);
