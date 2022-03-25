@@ -18,7 +18,7 @@ public class InterpreteLisp {
 	public String interpretarCodigo(String codigo) {
     	String p;
 		boolean r = false;
-		boolean conditional = true;
+		boolean c = true;
     	String operacion = "";
     	String nombreFuncion = "";
     	Calculator calculadoraLisp = new Calculator();
@@ -26,14 +26,42 @@ public class InterpreteLisp {
     	Predicados predicado = new Predicados();
         StackArrayList<String> stack = new StackArrayList<String>();
         StackArrayList<String> codigoRecursivo = new StackArrayList<String>();
+        StackArrayList<String> recursivoR = new StackArrayList<String>();
         StackArrayList<Defun> stackFunciones = new StackArrayList<Defun>();
+        String parametro;
+        String val;
+        String funcionVal;
+        String funcionNombre = "";
+        //int c = -2;
+		int contador = -1;
         
         stack = separarCaracteres(codigo);
         
-        if(r && conditional){ 
+        if(r && c){ 
 			stack = codigoRecursivo; 
 		}
-		
+        
+        if(r && !c) { 
+        	int vbls = 0;
+			int aux = 0; 
+			parametro = getParametro(funcionNombre); 
+			val = String.valueOf(contador); 
+			stack = pushParametro(stack, parametro, val);
+			StackArrayList<String> values = new StackArrayList<String>(); 
+			
+			for(int i = 0; i < stack.count(); i++) {
+				String key = stack.get(i);
+				if(key.equals(funcionNombre)) { 
+					values.push(recursivoR.get(vbls)); 
+					aux = i;
+					vbls++;
+				}
+				if(i != (aux + 1) && i != (aux + 2) && i != (aux + 3) && i != aux) { 
+					values.push(key);
+				}
+			}
+			stack = values; 
+		}
         p = stack.get(0);
 
         if(p.equals("+") || p.equals("-") || p.equals("*")||p.equals("/")) {
@@ -59,7 +87,7 @@ public class InterpreteLisp {
         	 String nuevoCodigo = codigo;
         	 
         	 String funcion = "";
-        	 if((stack.count() >=5)) {
+        	 if((stack.count() >=4)) {
         		 System.out.println("¡Error!, ha ingresado valores de mas, recuerde que una función lleva (DEFUN + Nombre de la función + (Parametros))");
         	 }else {
         		 for(int i = 3; i<stack.count();i++) {
@@ -71,7 +99,7 @@ public class InterpreteLisp {
         	 }
         	 
         	 //return stackFunciones.peek().nombreFuncion;
-        	 return "Se ha creado exitosamente la función de nombre: "+ stackFunciones.peek().nombreFuncion + "\nDigite 'functions' si desea programar su función ";
+        	 return "Se ha creado exitosamente la función de nombre: "+ stackFunciones.peek().nombreFuncion;
          
          }else if(p.equals("setq")){
         	 if(stack.count()>5) {
@@ -83,7 +111,6 @@ public class InterpreteLisp {
         	 return "Se ha asignado el valor "+ stack.get(2) + " para la variable: "+stack.get(1);
         	 
          }else if (functions.buscarLlaves(p)) {
-				//StackVector<String> x = setq.changeVariablesFound(mainCode);
         	 String cadena = "";
              for(int i = 0; i < stack.count(); i++){
                  cadena += stack.get(i);
@@ -134,7 +161,7 @@ public class InterpreteLisp {
 					return predicado.evaluarPredicado(expresion);
 				}
          }else if(p.equals(">")) {
-        	 String expression = "";
+        	 String expresion = "";
         	 if(stack.count() > 3) {
 					return "¡Error! El metodo > solo toma dos argumentos";
 				}else if(stack.count() < 3 ) {
@@ -142,11 +169,12 @@ public class InterpreteLisp {
 				}else {
 					stack = functions.cambioVariable(stack);
 					for(int i = 0; i<stack.count(); i++) {
-						expression += stack.get(i) + " ";
+						expresion += stack.get(i) + " ";
 					}
-					return predicado.evaluarPredicado(expression);
+					return predicado.evaluarPredicado(expresion);
 				}
-			}	
+			}
+				
         return "";
 	}    
 
@@ -171,5 +199,28 @@ public class InterpreteLisp {
     	StackArrayList<String> function = new StackArrayList<String>();
     	
     	return function;
+    }
+    
+    public String getParametro(String functionName) {
+    	StackArrayList<Defun> stackFunciones = new StackArrayList<Defun>();
+    	for(int i = 0; i < stackFunciones.count(); i++) {
+    		if( functionName.equals(stackFunciones.get(i).getNombreFuncion()) ) {
+    			return stackFunciones.get(i).getParametros(); 
+    		}
+    	}
+    	return "null";
+    }
+    
+    public StackArrayList<String> pushParametro(StackArrayList<String> codigo, String parametro, String val) {
+    	StackArrayList<String> p = new StackArrayList<String>();
+    	for(int a = 0; a < codigo.count(); a++) {
+    		String key = codigo.get(a);
+    		if( key.equals(parametro) ) { 
+    			p.push(val); 
+    		}else {
+    			p.push(key);
+    		}
+    	}
+    	return p;
     }
 }
