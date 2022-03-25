@@ -45,13 +45,13 @@ public class Proyecto01Main {
         
         while (salir != true) {
         	String codigo = "";
-            System.out.print("\nLisp UVG> ");
+            System.out.print("\nLisp UVG> "); //Imprime el lugar para colocar lo que quiere hacer el usuario.
             do {
                 codigo = scan.nextLine();
-            } while (codigo.length() <= 0);
+            } while (codigo.length() <= 0); //Ciclo while para comprobar si el código impreso contiene algo escrito.
 			try {
 
-				System.out.println(Interprete.interpretarCodigo(codigo));
+				System.out.println(Interprete.interpretarCodigo(codigo)); //Interpreta el código de acuerdo a lo que quiera hacer el usuario.
 				
 			} catch (IndexOutOfBoundsException e) {
 				//TODO: handle exception

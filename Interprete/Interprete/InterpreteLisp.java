@@ -15,7 +15,7 @@ public class InterpreteLisp {
     
    
 
-	public String interpretarCodigo(String codigo) {
+	public String interpretarCodigo(String codigo) { //Método para interpretar código.
     	String p;
 		boolean r = false;
 		boolean conditional = true;
@@ -36,7 +36,7 @@ public class InterpreteLisp {
 		
         p = stack.get(0);
 
-        if(p.equals("+") || p.equals("-") || p.equals("*")||p.equals("/")) {
+        if(p.equals("+") || p.equals("-") || p.equals("*")||p.equals("/")) { //Condicional if para las direentes operaciones aritméticas.
                 stack = functions.cambioVariable(stack);
                 for(int i = 0; i < stack.count(); i++){
                     operacion += stack.get(i);
@@ -44,7 +44,7 @@ public class InterpreteLisp {
                 }  
                 String resultado = calculadoraLisp.calcularOperacion(operacion);
                 return resultado;
-         }else if(p.equals("quote")) {
+         }else if(p.equals("quote")) { //Opción para el quote en Lisp.
         	 String cadena = "";
         	 String[] resultadoRp = codigo.replace("(","").replace(")","").split(" ");
         	 for(int i=0; i<resultadoRp.length;i++) {
@@ -55,7 +55,7 @@ public class InterpreteLisp {
         	 }
         	 nombreFuncion = cadena;
         	 return ("("+cadena+")");
-         }else if(p.equals("defun")) {
+         }else if(p.equals("defun")) { //Opción para la utilización de funciones en Lisp.
         	 String nuevoCodigo = codigo;
         	 
         	 String funcion = "";
@@ -73,7 +73,7 @@ public class InterpreteLisp {
         	 //return stackFunciones.peek().nombreFuncion;
         	 return "Se ha creado exitosamente la funci�n de nombre: "+ stackFunciones.peek().nombreFuncion + "\nDigite 'functions' si desea programar su funci�n ";
          
-         }else if(p.equals("setq")){
+         }else if(p.equals("setq")){ //Opción para utilizar el setq.
         	 if(stack.count()>5) {
         		 System.out.println("�SetQ solo acepta una variable y un valor!");
         	 }else {
@@ -91,23 +91,23 @@ public class InterpreteLisp {
                  cadena += " ";   
              }
 				return cadena;
-         }else if(p.equals("atom")) {
+         }else if(p.equals("atom")) {  //Opción para utilizar el predicado Atom.
         	 String bool = "";
         	 for(int i=0;i<stack.count();i++) {
         		 bool += stack.get(i);
         		 bool += " ";
         	 }
         	 
-        	 return predicado.evaluarPredicado(bool);
-         }else if(p.equals("list")) {
+        	 return predicado.evaluarPredicado(bool); //Retorna el predicado.
+         }else if(p.equals("list")) { //Opción para utilizar el predicado List.
         	 String bool = "";
         	 for(int i=0;i<stack.count();i++) {
         		 bool += stack.get(i);
         		 bool += " ";
         	 }
         	 
-        	 return predicado.evaluarPredicado(bool);
-         }else if(p.equals("equal")) {
+        	 return predicado.evaluarPredicado(bool); //Retorna el predicado.
+         }else if(p.equals("equal")) { //Opción para utilizar el predicado Equal.
         	 String expresion = "";
         	 if(stack.count() > 3) {
 					return "�Error! El metodo Equal solo toma dos argumentos";
@@ -118,9 +118,9 @@ public class InterpreteLisp {
 					for(int i = 0; i<stack.count(); i++) {
 						expresion += stack.get(i) + " ";
 					}
-					return predicado.evaluarPredicado(expresion);
+					return predicado.evaluarPredicado(expresion); //Retorna el predicado.
 				}
-         }else if(p.equals("<")) {
+         }else if(p.equals("<")) { //Opción para utilizar el predicado menor que.
         	 String expresion = "";
         	 if(stack.count() > 3) {
 					return "�Error! El metodo < solo toma dos argumentos";
@@ -132,9 +132,9 @@ public class InterpreteLisp {
 					for(int i = 0; i<stack.count(); i++) {
 						expresion += stack.get(i) + " ";
 					}
-					return predicado.evaluarPredicado(expresion);
+					return predicado.evaluarPredicado(expresion); //Retorna el predicado.
 				}
-         }else if(p.equals(">")) {
+         }else if(p.equals(">")) { //Opción para utilizar el predicado mayor que.
         	 String expression = "";
         	 if(stack.count() > 3) {
 					return "�Error! El metodo > solo toma dos argumentos";
@@ -145,13 +145,13 @@ public class InterpreteLisp {
 					for(int i = 0; i<stack.count(); i++) {
 						expression += stack.get(i) + " ";
 					}
-					return predicado.evaluarPredicado(expression);
+					return predicado.evaluarPredicado(expression); //Retorna el predicado.
 				}
 			}	
         return "";
 	}    
 
-    public StackArrayList<String> separarCaracteres(String codigo) {
+    public StackArrayList<String> separarCaracteres(String codigo) { //Método para separar caracteres de la expresión en la calculadora.
         StackArrayList<String> caracteres = new StackArrayList<String>();
 
         if (!codigo.contains("(") || !codigo.contains(")")) {
@@ -168,7 +168,7 @@ public class InterpreteLisp {
         return caracteres;
     }
     
-    public StackArrayList<String> defun(){
+    public StackArrayList<String> defun(){  //Método para devolver la función defun al programa.
     	StackArrayList<String> function = new StackArrayList<String>();
     	
     	return function;
