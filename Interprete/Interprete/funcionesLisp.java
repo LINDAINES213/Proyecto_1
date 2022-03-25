@@ -21,7 +21,7 @@ public class funcionesLisp {
 		return nuevosValores;
 	}
 	
-	public void añadirHashmap(String variable, String valor) {
+	public void anadirHashmap(String variable, String valor) {
 		HashMap<String, String> hmap = new HashMap<String, String>();
 		if(hmap.containsKey(variable)) {
 			hmap.remove(variable);

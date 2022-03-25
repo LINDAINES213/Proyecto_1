@@ -60,7 +60,7 @@ public class InterpreteLisp {
         	 
         	 String funcion = "";
         	 if((stack.count() >=5)) {
-        		 System.out.println("¡Error!, ha ingresado valores de mas, recuerde que una función lleva (DEFUN + Nombre de la función + (Parametros))");
+        		 System.out.println("ï¿½Error!, ha ingresado valores de mas, recuerde que una funciï¿½n lleva (DEFUN + Nombre de la funciï¿½n + (Parametros))");
         	 }else {
         		 for(int i = 3; i<stack.count();i++) {
         			 funcion += stack.get(i);
@@ -71,13 +71,13 @@ public class InterpreteLisp {
         	 }
         	 
         	 //return stackFunciones.peek().nombreFuncion;
-        	 return "Se ha creado exitosamente la función de nombre: "+ stackFunciones.peek().nombreFuncion + "\nDigite 'functions' si desea programar su función ";
+        	 return "Se ha creado exitosamente la funciï¿½n de nombre: "+ stackFunciones.peek().nombreFuncion + "\nDigite 'functions' si desea programar su funciï¿½n ";
          
          }else if(p.equals("setq")){
         	 if(stack.count()>5) {
-        		 System.out.println("¡SetQ solo acepta una variable y un valor!");
+        		 System.out.println("ï¿½SetQ solo acepta una variable y un valor!");
         	 }else {
-        		 functions.añadirHashmap(stack.get(1),stack.get(2));
+        		 functions.anadirHashmap(stack.get(1),stack.get(2));
         	 }
         	 
         	 return "Se ha asignado el valor "+ stack.get(2) + " para la variable: "+stack.get(1);
@@ -109,9 +109,9 @@ public class InterpreteLisp {
          }else if(p.equals("equal")) {
         	 String expresion = "";
         	 if(stack.count() > 3) {
-					return "¡Error! El metodo Equal solo toma dos argumentos";
+					return "ï¿½Error! El metodo Equal solo toma dos argumentos";
 				}else if(stack.count() < 3 ) {
-					return "¡Error! El metodo Equal solo toma dos argumentos";
+					return "ï¿½Error! El metodo Equal solo toma dos argumentos";
 				}else {
 					stack = functions.cambioVariable(stack);
 					for(int i = 0; i<stack.count(); i++) {
@@ -122,9 +122,9 @@ public class InterpreteLisp {
          }else if(p.equals("<")) {
         	 String expresion = "";
         	 if(stack.count() > 3) {
-					return "¡Error! El metodo < solo toma dos argumentos";
+					return "ï¿½Error! El metodo < solo toma dos argumentos";
 				}else if(stack.count() < 3 ) {
-					return "¡Error! El metodo > solo toma dos argumentos";
+					return "ï¿½Error! El metodo > solo toma dos argumentos";
 				}else {
 					stack = functions.cambioVariable(stack);
 					
@@ -136,9 +136,9 @@ public class InterpreteLisp {
          }else if(p.equals(">")) {
         	 String expression = "";
         	 if(stack.count() > 3) {
-					return "¡Error! El metodo > solo toma dos argumentos";
+					return "ï¿½Error! El metodo > solo toma dos argumentos";
 				}else if(stack.count() < 3 ) {
-					return "¡Error! El metodo > solo toma dos argumentos";
+					return "ï¿½Error! El metodo > solo toma dos argumentos";
 				}else {
 					stack = functions.cambioVariable(stack);
 					for(int i = 0; i<stack.count(); i++) {
