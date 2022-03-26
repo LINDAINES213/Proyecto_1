@@ -17,4 +17,8 @@ public interface IStack<T> {
 
     T get(int a);
 
+	boolean isInStack(String value);
+
+	void remove(int a);
+
 }

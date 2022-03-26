@@ -226,7 +226,8 @@ public class InterpreteLisp {
 				}
 			}
 		}
-				
+		
+        System.out.println(resultado);
         String o = recursivoR.peek();
         return resultado;
 	}    
