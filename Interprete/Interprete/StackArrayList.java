@@ -46,4 +46,19 @@ public class StackArrayList<T> implements IStack<T> {
     public T get(int a) {
         return lista.get(a);
     }
+    
+    @Override
+	public void remove(int a) {
+		lista.remove(a);
+	}
+    
+    @Override
+    public boolean isInStack(String value) {
+		for(int i = 0; i < lista.size(); i++){
+            if(lista.get(i).equals(value)){
+                return true;
+            }
+        }
+        return false;
+	}
 }

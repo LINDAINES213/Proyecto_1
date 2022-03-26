@@ -39,4 +39,13 @@ public class funcionesLisp {
 			return false;
 		}
 	}
+	
+	public boolean findVariable(String key) {
+		HashMap<String, String> hmap = new HashMap<String, String>();
+		if(hmap.containsKey(key)) { //if found
+			return true;
+		}else {
+			return false;
+		}
+	}
 }
